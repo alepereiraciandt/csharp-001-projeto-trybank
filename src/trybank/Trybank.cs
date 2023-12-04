@@ -136,7 +136,25 @@ public class TrybankLib
     // 5. Construa a funcionalidade de depositar dinheiro
     public void Deposit(int value)
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (!Logged)
+            {
+                throw new AccessViolationException("Usuário não está logado");
+            }
+            else
+            {
+                for (int i = 0; i < registeredAccounts; i++)
+                {
+                    Bank[i, 3] = value;
+                }
+            }
+        }
+        catch (AccessViolationException err)
+        {
+            Console.WriteLine(err.Message);
+            throw;
+        }
     }
 
     // 6. Construa a funcionalidade de sacar dinheiro
