@@ -93,7 +93,23 @@ public class TrybankLib
     // 3. Construa a funcionalidade de fazer Logout
     public void Logout()
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (!Logged)
+            {
+                throw new AccessViolationException("Usuário não está logado");
+            }
+            else
+            {
+                Logged = false;
+                loggedUser = -99;
+            }
+        }
+        catch (AccessViolationException err)
+        {
+            Console.WriteLine(err.Message);
+            throw;
+        }
     }
 
     // 4. Construa a funcionalidade de checar o saldo
